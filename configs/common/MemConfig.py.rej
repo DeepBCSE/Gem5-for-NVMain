@@ -1,0 +1,10 @@
+--- MemConfig.py
++++ MemConfig.py
+@@ -49,6 +49,7 @@
+ # fina; list. A target may be specified as a tuple, in which case the
+ # first available memory controller model in the tuple will be used.
+ _mem_aliases_all = [
++    ("nvmain", "NVMainMemory"),
+     ("simple_mem", "SimpleMemory"),
+     ("ddr3_1600_x64", "DDR3_1600_x64"),
+     ("lpddr2_s4_1066_x32", "LPDDR2_S4_1066_x32"),

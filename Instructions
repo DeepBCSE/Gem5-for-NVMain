@@ -1,0 +1,130 @@
+---------
+Contents
+---------
+1. Install Gem5
+	i) Run in SE mode
+	ii) Configure and Run in FS mode
+2. Install NVMain
+3. Integration
+
+
+-----------
+My contact
+-----------
+deepb.cse@gmail.com
+
+
+-----------------
+Tested Machine 1
+-----------------
+lsb_release -a		Ubuntu 20.04.3 LTS
+gcc -v			5.3.1
+g++ -v			5.3.1
+python -V		2.7.18 
+scons -v		3.0.5
+swig -version		3.0.12
+
+
+-----------------
+Tested Machine 2
+-----------------
+lsb_release -a		Ubuntu 18.04.5 LTS
+gcc -v			5.3.1
+g++ -v			5.3.1
+python -V		2.7.18 
+scons -v		3.0.5
+swig -version		3.0.12
+
+
+-----------------------
+My Directory Structure
+-----------------------
+*
+|
++-- Gem5
+|
++-- NVMain
+|
++-- fs-image
+
+
+---------------------
+Install Dependencies
+---------------------
+[Install gcc 5, Python 2, make them default]
+
+[Uninstall any installed Scons version(s), instal Scons 3.0.5]
+
+[Uninstall any installed SWIG version(s), install SWIG 3.0.12]
+
+sudo apt install build-essential git m4 zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev libpython2-dev python2-dev python-six libpcre3-dev libboost-all-dev libhdf5-serial-dev python-pydot libpng-dev libelf-dev pkg-config pip
+
+pip install mypy
+
+
+-------------
+Install Gem5
+-------------
+[Ask the source code from myself: deepb.cse@gmail.com]
+
+[Go to the Gem5 directory]
+scons build/X86/gem5.opt -j <No. of Threads in your CPU> (Took 7 minutes in a 8 thread CPU, minutes in a 6 thread CPU)
+
+[An error may come related to the file timer.cc] 
+	[Rename "static" as "extern" in Gem5/src/cpu/kvm/timer.cc line 63]
+
+	scons build/X86/gem5.opt -j <No. of Threads in your CPU>
+	
+
+------------------
+Gem5 SE mode test
+------------------
+[Go to the Gem5 directory]
+build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello
+
+
+------------------------------------
+Configure Gem5 for Full System mode
+------------------------------------
+Download the X86 Full Syste Files from here: http://www.m5sim.org/Download
+[Extract this in a folder named "fs-image" and copy the path of this folder in Gem5/configs/common/SysPaths.py line 60]
+
+
+------------------
+Gem5 FS mode test
+------------------
+[Go to the Gem5 directory]
+build/X86/gem5.opt configs/example/fs.py --kernel=x86_64-vmlinux-2.6.22.9 --disk-image=linux-x86.img
+
+
+---------------
+Install NVMain
+---------------
+Download the the 29 Aug 2018 commit (ad28c0c) from here: https://github.com/SEAL-UCSB/NVmain/commits/master
+[Extract this in a folder named "NVMain"]
+[Comment out the whole line in /NVMain/SConscript line 36: from gem5_scons import Transform]
+
+[Go to the NVMain directory]
+scons --build-type=fast -j <No. of Threads in your CPU>
+
+
+------------
+NVMain test
+------------
+[Go to the NVMain directory]
+./nvmain.fast Config/PCM_ISSCC_2012_4GB.config Tests/Traces/hello_world.nvt 1000000
+
+
+--------------------------
+Integrate Gem5 and NVMain
+--------------------------
+[Go to the Gem5 directory]
+git apply ../NVMain/patches/gem5/nvmain2-gem5-11688+
+scons EXTRAS=../NVMain build/X86/gem5.opt -j <No. of Threads in your CPU>
+
+
+-----------------
+Integration test
+-----------------
+[Go to the Gem5 directory]
+build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello --mem-type=NVMainMemory --caches --l2cache --l1i_size 32kB --l1d_size 32kB --l2_size 2MB --cpu-type=detailed --nvmain-config=../NVMain/Config/2D_DRAM_example.config
