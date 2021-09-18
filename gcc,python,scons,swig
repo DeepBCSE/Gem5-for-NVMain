@@ -1,0 +1,54 @@
+------
+gcc 5
+------
+sudo apt install vim
+
+sudo vim /etc/apt/sources.list
+[Add the below two lines in the end]
+deb http://dk.archive.ubuntu.com/ubuntu/ xenial main
+deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe
+Note: How to edit in vim:
+	I	Enter into edit mode
+	Esc	Exit from edit mode
+	:wq	Save the file with all changes
+	Copy-paste commands are same as that of terminal
+
+
+sudo apt update
+
+sudo apt install gcc-5 g++-5
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 100
+
+
+-----------
+python 2.7
+-----------
+sudo apt install python2.7
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
+
+
+------------
+scons 3.0.5
+------------
+Download:
+https://sourceforge.net/projects/scons/files/scons/
+
+Install:
+[Go to the scons directory]
+sudo python setup.py install --standard-lib
+
+
+------------
+swig 3.0.12
+------------
+Download
+https://sourceforge.net/projects/swig/files/swig/
+
+Install:
+[Go to the swig directory]
+./configure
+make
+sudo make install
