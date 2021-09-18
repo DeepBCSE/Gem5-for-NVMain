@@ -57,9 +57,7 @@ Install Dependencies
 
 [Uninstall any installed SWIG version(s), install SWIG 3.0.12]
 
-sudo apt install build-essential git m4 zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev libpython2-dev python2-dev python-six libpcre3-dev libboost-all-dev libhdf5-serial-dev python-pydot libpng-dev libelf-dev pkg-config pip
-
-pip install mypy
+sudo apt install build-essential git m4 zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev libpython2.7-dev python2.7-dev python-six libpcre3-dev libboost-all-dev libhdf5-serial-dev python-pydot libpng-dev libelf-dev pkg-config
 
 
 -------------
