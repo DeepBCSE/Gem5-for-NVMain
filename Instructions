@@ -68,7 +68,7 @@ Install Gem5
 [Download the latest commit from my Github repository https://github.com/DeepBCSE/Gem5-for-NVMain]
 [Rename the folder as Gem5]
 [Go to the Gem5 directory]
-scons build/X86/gem5.opt -j <No. of Threads in your CPU> (Took 7 minutes in a 8 thread CPU, minutes in a 6 thread CPU)
+scons build/X86/gem5.opt -j <No. of Threads in your CPU>
 
 [An error came in Machine 1 related to the file timer.cc] 
 	[Rename "static" as "extern" in Gem5/src/cpu/kvm/timer.cc line 63]
