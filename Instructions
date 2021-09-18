@@ -28,10 +28,10 @@ swig -version		3.0.12
 -----------------
 Tested Machine 2
 -----------------
-lsb_release -a		Ubuntu 18.04.5 LTS
-gcc -v			5.3.1
-g++ -v			5.3.1
-python -V		2.7.18 
+lsb_release -a		Ubuntu 18.04.6 LTS
+gcc -v			5.5.0
+g++ -v			5.5.0
+python -V		2.7.17 
 scons -v		3.0.5
 swig -version		3.0.12
 
@@ -51,7 +51,9 @@ My Directory Structure
 ---------------------
 Install Dependencies
 ---------------------
-[Install gcc 5, Python 2, make them default]
+[Install gcc 5, make it default]
+
+[Install Python 2, make it default]
 
 [Uninstall any installed Scons version(s), instal Scons 3.0.5]
 
@@ -65,14 +67,15 @@ Install Gem5
 -------------
 [Download the latest commit from my Github repository https://github.com/DeepBCSE/Gem5-for-NVMain]
 [Rename the folder as Gem5]
-
 [Go to the Gem5 directory]
 scons build/X86/gem5.opt -j <No. of Threads in your CPU> (Took 7 minutes in a 8 thread CPU, minutes in a 6 thread CPU)
 
-[An error may come related to the file timer.cc] 
+[An error came in Machine 1 related to the file timer.cc] 
 	[Rename "static" as "extern" in Gem5/src/cpu/kvm/timer.cc line 63]
-
 	scons build/X86/gem5.opt -j <No. of Threads in your CPU>
+	
+[An error came in both the Machines related to Permission of the file cpt_upgrader.cpy]
+	[Run the command chmod +x cpt_upgrader.py in the directory Gem5/util]
 	
 
 ------------------
@@ -85,7 +88,7 @@ build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux
 ------------------------------------
 Configure Gem5 for Full System mode
 ------------------------------------
-Download the X86 Full Syste Files from here: http://www.m5sim.org/Download
+[Download the X86 Full Syste Files from here: http://www.m5sim.org/Download]
 [Extract this in a folder named "fs-image" and copy the path of this folder in Gem5/configs/common/SysPaths.py line 60]
 
 
@@ -99,10 +102,9 @@ build/X86/gem5.opt configs/example/fs.py --kernel=x86_64-vmlinux-2.6.22.9 --disk
 ---------------
 Install NVMain
 ---------------
-Download the the 29 Aug 2018 commit (ad28c0c) from here: https://github.com/SEAL-UCSB/NVmain/commits/master
+[Download the the 29 Aug 2018 commit (ad28c0c) from here: https://github.com/SEAL-UCSB/NVmain/commits/master]
 [Extract this in a folder named "NVMain"]
 [Comment out the whole line in /NVMain/SConscript line 36: from gem5_scons import Transform]
-
 [Go to the NVMain directory]
 scons --build-type=fast -j <No. of Threads in your CPU>
 
