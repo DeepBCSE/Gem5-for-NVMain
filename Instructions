@@ -82,7 +82,7 @@ scons build/X86/gem5.opt -j <No. of Threads in your CPU>
 Gem5 SE mode test
 ------------------
 [Go to the Gem5 directory]
-build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello
+./build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello
 
 
 ------------------------------------
@@ -96,7 +96,7 @@ Configure Gem5 for Full System mode
 Gem5 FS mode test
 ------------------
 [Go to the Gem5 directory]
-build/X86/gem5.opt configs/example/fs.py --kernel=x86_64-vmlinux-2.6.22.9 --disk-image=linux-x86.img
+./build/X86/gem5.opt configs/example/fs.py --kernel=x86_64-vmlinux-2.6.22.9 --disk-image=linux-x86.img
 
 
 ---------------
@@ -128,4 +128,4 @@ scons EXTRAS=../NVMain build/X86/gem5.opt -j <No. of Threads in your CPU>
 Integration test
 -----------------
 [Go to the Gem5 directory]
-build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello --mem-type=NVMainMemory --caches --l2cache --l1i_size 32kB --l1d_size 32kB --l2_size 2MB --cpu-type=detailed --nvmain-config=../NVMain/Config/2D_DRAM_example.config
+./build/X86/gem5.opt configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello --mem-type=NVMainMemory --nvmain-config=../NVMain/Config/2D_DRAM_example.config
